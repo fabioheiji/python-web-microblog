@@ -1,13 +1,16 @@
+import os
 from flask import Flask, request, render_template
 from datetime import datetime
 from pymongo import MongoClient
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def create_app():
     app = Flask(__name__)
 
     # client agora é um cluster
-    client = MongoClient("mongodb+srv://fabio:osCU8R1kcovVuIPt@cluster0.b8x2t.mongodb.net/test")
+    client = MongoClient(os.environ.get("MONGODB_URI"))
 
     # client.microblog é a base de dados que criamos sobre o cluster acima
     # adicionaremos esta base de dados a base de dados do nosso app
